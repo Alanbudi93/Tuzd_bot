@@ -1,10 +1,13 @@
-import os
 import telebot
-import requests
-from datetime import datetime
+import os
 
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-bot = telebot.TeleBot(BOT_TOKEN)
+bot = telebot.TeleBot(os.environ['TELEGRAM_BOT_TOKEN'])
+
+@bot.message_handler(commands=['start'])
+def start_handler(message):
+    bot.reply_to(message, "Bot aktif!")
+
+bot.infinity_polling()
 
 AKUN_FILE = "poinku.txt"
 SUKSES_FILE = "login_sukses.txt"
