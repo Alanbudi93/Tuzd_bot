@@ -1,16 +1,17 @@
 import telebot
 import os
-from flask import Flask, request
-
-TOKEN = os.getenv("BOT_TOKEN")
-bot = telebot.TeleBot(TOKEN)
+from flask import Flask
+import telebot
+import os
 
 app = Flask(__name__)
+bot = telebot.TeleBot(os.environ['BOT_TOKEN'])
 
-@app.route("/")
-def home():
-    return "Bot is running via webhook!", 200
+@app.route('/')
+def index():
+    return "Bot is running!"
 
+# Tambahkan handler bot kamu di sini
 @app.route(f"/{TOKEN}", methods=['POST'])
 def receive_update():
     json_data = request.get_data().decode("utf-8")
